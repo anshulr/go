@@ -573,6 +573,8 @@ func TestStarRequest(t *testing.T) {
 	// Ignore the Headers (the User-Agent breaks the deep equal,
 	// but we don't care about it)
 	req.Header = nil
+	req.HeaderOrderedKeys = nil
+	back.HeaderOrderedKeys = nil
 	back.Header = nil
 	if !reflect.DeepEqual(req, back) {
 		t.Errorf("Original request doesn't match Request read back.")
