@@ -132,6 +132,9 @@ type Request struct {
 	// for the Request.Write method.
 	Header Header
 
+	// Header keys in incoming order
+	HeaderOrderedKeys []string
+
 	// Body is the request's body.
 	//
 	// For client requests a nil body means the request has no
@@ -762,12 +765,14 @@ func readRequest(b *bufio.Reader, deleteHostHeader bool) (req *Request, err erro
 	}
 
 	// Subsequent lines: Key: value.
-	mimeHeader, err := tp.ReadMIMEHeader()
+	//mimeHeader, err := tp.ReadMIMEHeader()
+	mimeHeader, keys, err := tp.ReadMIMEHeaderWithOrder()
 	if err != nil {
 		return nil, err
 	}
-	req.Header = Header(mimeHeader)
 
+	req.Header = Header(mimeHeader)
+	req.HeaderOrderedKeys = keys
 	// RFC2616: Must treat
 	//	GET /index.html HTTP/1.1
 	//	Host: www.google.com
