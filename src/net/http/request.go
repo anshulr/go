@@ -132,9 +132,6 @@ type Request struct {
 	// for the Request.Write method.
 	Header Header
 
-	// Header keys in incoming order
-	HeaderOrderedKeys []string
-
 	// Body is the request's body.
 	//
 	// For client requests a nil body means the request has no
@@ -606,7 +603,7 @@ func NewRequest(method, urlStr string, body io.Reader) (*Request, error) {
 		method = "GET"
 	}
 	if !validMethod(method) {
-		return nil, fmt.Errorf("github.com/johnmelba/vishesh-recon/lib/net/http: invalid method %q", method)
+		return nil, fmt.Errorf("net/http: invalid method %q", method)
 	}
 	u, err := url.Parse(urlStr)
 	if err != nil {
@@ -765,14 +762,12 @@ func readRequest(b *bufio.Reader, deleteHostHeader bool) (req *Request, err erro
 	}
 
 	// Subsequent lines: Key: value.
-	//mimeHeader, err := tp.ReadMIMEHeader()
-	mimeHeader, keys, err := tp.ReadMIMEHeaderWithOrder()
+	mimeHeader, err := tp.ReadMIMEHeader()
 	if err != nil {
 		return nil, err
 	}
-
 	req.Header = Header(mimeHeader)
-	req.HeaderOrderedKeys = keys
+
 	// RFC2616: Must treat
 	//	GET /index.html HTTP/1.1
 	//	Host: www.google.com

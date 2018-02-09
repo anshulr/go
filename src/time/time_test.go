@@ -940,7 +940,7 @@ func TestLoadFixed(t *testing.T) {
 	// So GMT+1 corresponds to -3600 in the Go zone, not +3600.
 	name, offset := Now().In(loc).Zone()
 	if name != "GMT+1" || offset != -1*60*60 {
-		//t.Errorf("Now().In(loc).Zone() = %q, %d, want %q, %d", name, offset, "GMT+1", -1*60*60)
+		t.Errorf("Now().In(loc).Zone() = %q, %d, want %q, %d", name, offset, "GMT+1", -1*60*60)
 	}
 }
 

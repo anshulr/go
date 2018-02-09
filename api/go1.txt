@@ -4785,7 +4785,6 @@ pkg net/http, type Request struct, Close bool
 pkg net/http, type Request struct, ContentLength int64
 pkg net/http, type Request struct, Form url.Values
 pkg net/http, type Request struct, Header Header
-pkg net/http, type Request struct, HeaderOrderedKeys []string
 pkg net/http, type Request struct, Host string
 pkg net/http, type Request struct, Method string
 pkg net/http, type Request struct, MultipartForm *multipart.Form
@@ -5042,7 +5041,6 @@ pkg net/textproto, method (*Conn) ReadDotLines() ([]string, error)
 pkg net/textproto, method (*Conn) ReadLine() (string, error)
 pkg net/textproto, method (*Conn) ReadLineBytes() ([]uint8, error)
 pkg net/textproto, method (*Conn) ReadMIMEHeader() (MIMEHeader, error)
-pkg net/textproto, method (*Conn) ReadMIMEHeaderWithOrder() (MIMEHeader, []string, error)
 pkg net/textproto, method (*Conn) ReadResponse(int) (int, string, error)
 pkg net/textproto, method (*Conn) StartRequest(uint)
 pkg net/textproto, method (*Conn) StartResponse(uint)
@@ -5061,7 +5059,6 @@ pkg net/textproto, method (*Reader) ReadDotLines() ([]string, error)
 pkg net/textproto, method (*Reader) ReadLine() (string, error)
 pkg net/textproto, method (*Reader) ReadLineBytes() ([]uint8, error)
 pkg net/textproto, method (*Reader) ReadMIMEHeader() (MIMEHeader, error)
-pkg net/textproto, method (*Reader) ReadMIMEHeaderWithOrder() (MIMEHeader, []string, error)
 pkg net/textproto, method (*Reader) ReadResponse(int) (int, string, error)
 pkg net/textproto, method (*Writer) DotWriter() io.WriteCloser
 pkg net/textproto, method (*Writer) PrintfLine(string, ...interface{}) error
